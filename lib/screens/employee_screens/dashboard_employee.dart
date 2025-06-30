@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../provider/theme_provider.dart';
-import '../provider/user_provider.dart';
-import '../services/firestore_service.dart';
+import '../../provider/theme_provider.dart';
+import '../../provider/user_provider.dart';
+import '../../services/firestore_service.dart';
 
+import '../../widgets/weather_card.dart';
 import 'attendance_view.dart';
 import 'employee_leave_status.dart';
 import 'leave_request_page.dart';
-import 'login_screen.dart';
+import '../common_screens/login_screen.dart';
 import 'policies_screen.dart';
-import 'profile_screen.dart';
-import 'calendar_view.dart';
+import '../common_screens/profile_screen.dart';
+import '../common_screens/calendar_view.dart';
 
 class DashboardItem {
   final String title;
@@ -66,7 +67,7 @@ class DashboardEmployee extends StatelessWidget {
     ];
 
     return Scaffold(
-      appBar: AppBar(title: const Text('Dashboard')),
+      appBar: AppBar(title: const Text('Welcome')),
       drawer: Drawer(
         backgroundColor: colorScheme.surface,
         child: ListView(
@@ -154,6 +155,7 @@ class DashboardEmployee extends StatelessWidget {
       body: ListView(
         padding: const EdgeInsets.all(10),
         children: [
+          const WeatherCard(),
           Card(
             child: Padding(
               padding: const EdgeInsets.all(16),

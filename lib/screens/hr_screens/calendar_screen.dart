@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:table_calendar/table_calendar.dart';
-import '../services/crud_service.dart';
-import '../utils/pdf_generator.dart';
-import '../widgets/common_widgets.dart';
+import '../../services/crud_service.dart';
+import '../../utils/pdf_generator.dart';
+import '../../widgets/common_widgets.dart';
 
 class CalendarScreen extends StatefulWidget {
   const CalendarScreen({super.key});

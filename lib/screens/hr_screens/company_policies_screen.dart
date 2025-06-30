@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import '../services/crud_service.dart';
-import '../widgets/common_widgets.dart';
+import '../../services/crud_service.dart';
+import '../../widgets/common_widgets.dart';
 
 class CompanyPolicyScreen extends StatefulWidget {
   const CompanyPolicyScreen({super.key});

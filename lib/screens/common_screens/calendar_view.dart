@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import '../services/crud_service.dart';
+import '../../services/crud_service.dart';
 
 class CalendarViewWidget extends StatefulWidget {
   final String role;

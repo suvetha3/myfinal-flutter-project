@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import '../services/crud_service.dart';
-import '../widgets/common_widgets.dart';
+import '../../services/crud_service.dart';
+import '../../widgets/common_widgets.dart';
 
 class CodesMaster extends StatefulWidget {
   const CodesMaster({super.key});

@@ -6,7 +6,7 @@ import 'package:intl/intl.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
 import 'dart:convert';
 
-import '../provider/user_provider.dart';
+import '../../provider/user_provider.dart';
 
 class MyAttendanceScreen extends StatefulWidget {
   const MyAttendanceScreen({super.key});
@@ -18,6 +18,8 @@ class MyAttendanceScreen extends StatefulWidget {
 class _MyAttendanceScreenState extends State<MyAttendanceScreen> {
   DateTime selectedDate = DateTime.now();
   List<Map<String, dynamic>> attendanceList = [];
+  String _selectedView = 'Day';
+
 
   bool _hasScanned = false;
   bool _isCheckOut = false;
@@ -32,14 +34,48 @@ class _MyAttendanceScreenState extends State<MyAttendanceScreen> {
     final email = Provider.of<UserProvider>(context, listen: false).email;
     if (email == null || email.isEmpty) return;
 
-    final formattedDate = DateFormat('dd-MM-yyyy').format(selectedDate);
-    final docId = "$email-$formattedDate";
+    final attendanceCollection = FirebaseFirestore.instance.collection('attendance');
 
-    final doc = await FirebaseFirestore.instance.collection('attendance').doc(docId).get();
+    if (_selectedView == 'Day') {
+      final formattedDate = DateFormat('dd-MM-yyyy').format(selectedDate);
+      final docId = "$email-$formattedDate";
 
-    setState(() {
-      attendanceList = doc.exists ? [doc.data()!..['date'] = formattedDate] : [];
-    });
+      final doc = await attendanceCollection.doc(docId).get();
+
+      setState(() {
+        attendanceList = doc.exists ? [doc.data()!..['date'] = formattedDate] : [];
+      });
+    } else {
+      DateTime startDate;
+      DateTime endDate;
+
+      if (_selectedView == 'Week') {
+        final weekDay = selectedDate.weekday;
+        startDate = selectedDate.subtract(Duration(days: weekDay - 1)); // Monday
+        endDate = selectedDate.add(Duration(days: 7 - weekDay)); // Sunday
+      } else {
+        // Month
+        startDate = DateTime(selectedDate.year, selectedDate.month, 1);
+        endDate = DateTime(selectedDate.year, selectedDate.month + 1, 0);
+      }
+
+      final snapshot = await attendanceCollection
+          .where('employeeId', isEqualTo: email)
+          .get();
+
+      final filtered = snapshot.docs.where((doc) {
+        final docDateStr = doc.data()['date'];
+        if (docDateStr == null) return false;
+        final docDate = DateFormat('dd-MM-yyyy').parse(docDateStr);
+        return docDate.isAtSameMomentAs(startDate) ||
+            (docDate.isAfter(startDate) && docDate.isBefore(endDate)) ||
+            docDate.isAtSameMomentAs(endDate);
+      }).map((doc) => doc.data()..['date'] = doc.data()['date']).toList();
+
+      setState(() {
+        attendanceList = filtered;
+      });
+    }
   }
 
   Future<void> _selectDate() async {
@@ -272,6 +308,24 @@ class _MyAttendanceScreenState extends State<MyAttendanceScreen> {
               ],
             ),
             const SizedBox(height: 20),
+            Wrap(
+              spacing: 10,
+              children: ['Day', 'Week', 'Month'].map((option) {
+                return ChoiceChip(
+                  label: Text(option),
+                  selected: _selectedView == option,
+                  onSelected: (bool selected) {
+                    if (selected) {
+                      setState(() {
+                        _selectedView = option;
+                      });
+                      fetchAttendance();
+                    }
+                  },
+                );
+              }).toList(),
+            ),
+            const SizedBox(height: 16),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [

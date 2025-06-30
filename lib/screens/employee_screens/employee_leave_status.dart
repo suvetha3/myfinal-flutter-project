@@ -1,8 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../provider/user_provider.dart';
-import 'leave_card.dart';
+import '../../provider/user_provider.dart';
+import '../../widgets/leave_card.dart';
 
 class LeaveStatusScreen extends StatefulWidget {
   const LeaveStatusScreen({super.key});
