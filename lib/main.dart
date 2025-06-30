@@ -1,9 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:finalproject/provider/theme_provider.dart';
 import 'package:finalproject/provider/user_provider.dart';
-import 'package:finalproject/screens/dashboard_employee.dart';
-import 'package:finalproject/screens/dashboard_hr.dart';
-import 'package:finalproject/screens/login_screen.dart';
+import 'package:finalproject/screens/employee_screens/dashboard_employee.dart';
+import 'package:finalproject/screens/hr_screens/dashboard_hr.dart';
+import 'package:finalproject/screens/common_screens/login_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

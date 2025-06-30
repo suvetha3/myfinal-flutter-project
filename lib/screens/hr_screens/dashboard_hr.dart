@@ -1,18 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../provider/theme_provider.dart';
-import '../provider/user_provider.dart';
-import '../services/firestore_service.dart';
+import '../../provider/theme_provider.dart';
+import '../../provider/user_provider.dart';
+import '../../services/firestore_service.dart';
 
-import 'calendar_view.dart';
+import '../../widgets/weather_card.dart';
+import '../common_screens/calendar_view.dart';
 import 'employee_master_screen.dart';
 import 'attendance_master.dart';
 import 'leave_master.dart';
 import 'calendar_screen.dart';
 import 'codes_page.dart';
 import 'company_policies_screen.dart';
-import 'login_screen.dart';
-import 'profile_screen.dart';
+import '../common_screens/login_screen.dart';
+import '../common_screens/profile_screen.dart';
 
 class DashboardHr extends StatelessWidget {
   const DashboardHr({super.key});
@@ -60,7 +61,7 @@ class DashboardHr extends StatelessWidget {
     ];
 
     return Scaffold(
-      appBar: AppBar(title: const Text('Dashboard')),
+      appBar: AppBar(title:  Text('Welcome')),
       drawer: Drawer(
         backgroundColor: colorScheme.surface,
         child: ListView(
@@ -138,6 +139,7 @@ class DashboardHr extends StatelessWidget {
       body: ListView(
         padding: const EdgeInsets.all(10),
         children: [
+          const WeatherCard(),
           Card(
             elevation: 4,
             shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),

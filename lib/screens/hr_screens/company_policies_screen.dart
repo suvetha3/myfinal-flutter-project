@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import '../services/crud_service.dart';
-import '../widgets/common_widgets.dart';
+import '../../services/crud_service.dart';
+import '../../widgets/common_widgets.dart';
 
 class CompanyPolicyScreen extends StatefulWidget {
   const CompanyPolicyScreen({super.key});
@@ -179,7 +179,7 @@ class _CompanyPolicyScreenState extends State<CompanyPolicyScreen> {
                         elevation: 2,
                         margin: const EdgeInsets.symmetric(vertical: 6, horizontal: 6),
                         child: ListTile(
-                          leading: const Icon(Icons.description, size: 32),
+                          leading: Icon(Icons.description, size: 32, color: Theme.of(context).colorScheme.primary,),
                           title: Text(doc['title'], style: const TextStyle(fontWeight: FontWeight.bold)),
                           subtitle: Text(doc['desc'], maxLines: 2, overflow: TextOverflow.ellipsis),
                           trailing: PopupMenuButton<String>(

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:table_calendar/table_calendar.dart';
-import '../services/crud_service.dart';
-import '../utils/pdf_generator.dart';
-import '../widgets/common_widgets.dart';
+import '../../services/crud_service.dart';
+import '../../utils/pdf_generator.dart';
+import '../../widgets/common_widgets.dart';
 
 class CalendarScreen extends StatefulWidget {
   const CalendarScreen({super.key});
@@ -192,68 +192,75 @@ class _CalendarScreenState extends State<CalendarScreen> {
       ),
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.all(12),
+          padding: const EdgeInsets.all(20),
           child: Column(
             children: [
-              TableCalendar(
-                firstDay: DateTime.utc(2000, 1, 1),
-                lastDay: DateTime.utc(2100, 12, 31),
-                focusedDay: _focusedDay,
-                selectedDayPredicate:
-                    (day) =>
-                        _selectedDay != null &&
-                        day.year == _selectedDay!.year &&
-                        day.month == _selectedDay!.month &&
-                        day.day == _selectedDay!.day,
-                onDaySelected: (selectedDay, focusedDay) {
-                  setState(() {
-                    _selectedDay = selectedDay;
-                    _focusedDay = focusedDay;
-                  });
-                },
-                onPageChanged: (focusedDay) {
-                  setState(() {
-                    _focusedDay = focusedDay;
-                  });
-                },
-                holidayPredicate: (day) => _getHoliday(day) != null,
-                calendarStyle: CalendarStyle(
-                  todayDecoration: BoxDecoration(
-                    color: Colors.deepPurple.shade300,
-                    shape: BoxShape.circle,
-                  ),
-                  selectedDecoration: BoxDecoration(
-                    color: Theme.of(context).colorScheme.primary,
-                    shape: BoxShape.circle,
-                  ),
-                  holidayDecoration: BoxDecoration(
-                    color: Theme.of(context).colorScheme.onTertiary,
-                    shape: BoxShape.circle,
-                  ),
-                  holidayTextStyle: const TextStyle(fontWeight: FontWeight.bold),
-                  weekendTextStyle:  TextStyle(color: Theme.of(context).colorScheme.error,),
+              Container(
+                decoration: BoxDecoration(
+                  color: Theme.of(context).colorScheme.surfaceContainer,
+                  borderRadius: BorderRadius.circular(12),
                 ),
-                calendarBuilders: CalendarBuilders(
-                  holidayBuilder: (context, day, focusedDay) {
-                    return GestureDetector(
-                      onTap: () {
-                        setState(() {
-                          _selectedDay = day;
-                          _focusedDay = focusedDay;
-                        });
-                      },
-                      child: Container(
-                        alignment: Alignment.center,
-                        child: Text(
-                          '${day.day}',
-                          style:  TextStyle(
-                            color: Theme.of(context).colorScheme.tertiary,
-                            fontWeight: FontWeight.bold,
+                padding: const EdgeInsets.all(10),
+                child: TableCalendar(
+                  firstDay: DateTime.utc(2000, 1, 1),
+                  lastDay: DateTime.utc(2100, 12, 31),
+                  focusedDay: _focusedDay,
+                  selectedDayPredicate:
+                      (day) =>
+                          _selectedDay != null &&
+                          day.year == _selectedDay!.year &&
+                          day.month == _selectedDay!.month &&
+                          day.day == _selectedDay!.day,
+                  onDaySelected: (selectedDay, focusedDay) {
+                    setState(() {
+                      _selectedDay = selectedDay;
+                      _focusedDay = focusedDay;
+                    });
+                  },
+                  onPageChanged: (focusedDay) {
+                    setState(() {
+                      _focusedDay = focusedDay;
+                    });
+                  },
+                  holidayPredicate: (day) => _getHoliday(day) != null,
+                  calendarStyle: CalendarStyle(
+                    todayDecoration: BoxDecoration(
+                      color: Colors.deepPurple.shade300,
+                      shape: BoxShape.circle,
+                    ),
+                    selectedDecoration: BoxDecoration(
+                      color: Theme.of(context).colorScheme.primary,
+                      shape: BoxShape.circle,
+                    ),
+                    holidayDecoration: BoxDecoration(
+                      color: Theme.of(context).colorScheme.onTertiary,
+                      shape: BoxShape.circle,
+                    ),
+                    holidayTextStyle: const TextStyle(fontWeight: FontWeight.bold),
+                    weekendTextStyle:  TextStyle(color: Theme.of(context).colorScheme.error,),
+                  ),
+                  calendarBuilders: CalendarBuilders(
+                    holidayBuilder: (context, day, focusedDay) {
+                      return GestureDetector(
+                        onTap: () {
+                          setState(() {
+                            _selectedDay = day;
+                            _focusedDay = focusedDay;
+                          });
+                        },
+                        child: Container(
+                          alignment: Alignment.center,
+                          child: Text(
+                            '${day.day}',
+                            style:  TextStyle(
+                              color: Theme.of(context).colorScheme.tertiary,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
                         ),
-                      ),
-                    );
-                  },
+                      );
+                    },
+                  ),
                 ),
               ),
               const SizedBox(height: 10),
@@ -285,9 +292,9 @@ class _CalendarScreenState extends State<CalendarScreen> {
                       final formattedDate = DateFormat('dd-MM-yyyy').format(holidayDate);
 
                       return Card(
-                        margin: const EdgeInsets.symmetric(
-                          horizontal: 12,
-                          vertical: 6,
+                        color: Theme.of(context).colorScheme.surfaceContainerLow,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
                         ),
                         child: ListTile(
                           leading:  Icon(

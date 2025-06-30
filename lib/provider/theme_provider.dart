@@ -116,7 +116,7 @@ class ThemeProvider extends ChangeNotifier {
       onPrimary: Colors.black,
       secondary: Colors.amber,
       tertiary: Colors.green.shade400,
-      surface: Colors.black87,
+      surface: Colors.grey.shade900,
       onSurface: Colors.white,
       error: Colors.red.shade300,
       onError: Colors.black,
@@ -126,7 +126,7 @@ class ThemeProvider extends ChangeNotifier {
       colorScheme: colorScheme,
       useMaterial3: true,
     ).copyWith(
-      scaffoldBackgroundColor: Colors.grey.shade900,
+      scaffoldBackgroundColor: Colors.black,
       appBarTheme: AppBarTheme(
         backgroundColor: colorScheme.surface,
         foregroundColor: colorScheme.onSurface,

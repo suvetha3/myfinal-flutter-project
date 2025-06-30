@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:intl/intl.dart';
 
-import '../provider/user_provider.dart';
-import '../widgets/common_widgets.dart';
+import '../../provider/user_provider.dart';
+import '../../widgets/common_widgets.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});

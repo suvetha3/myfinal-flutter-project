@@ -1,8 +1,8 @@
-import 'package:finalproject/screens/employee_form.dart';
+import 'package:finalproject/screens/hr_screens/employee_form.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import '../models/employee_model.dart';
-import '../services/employee_service.dart';
+import '../../models/employee_model.dart';
+import '../../services/employee_service.dart';
 
 class EmployeeMasterScreen extends StatefulWidget {
   const EmployeeMasterScreen({Key? key}) : super(key: key);
