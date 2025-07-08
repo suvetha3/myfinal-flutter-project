@@ -6,9 +6,10 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:intl/intl.dart';
 import 'package:qr_flutter/qr_flutter.dart';
-import '../provider/user_provider.dart';
-import '../services/firestore_service.dart';
-import '../utils/pdf_generator.dart';
+
+import '../../provider/user_provider.dart';
+import '../../services/firestore_service.dart';
+import '../../utils/pdf_generator.dart';
 
 class AttendanceMasterScreen extends StatefulWidget {
   const AttendanceMasterScreen({super.key});
