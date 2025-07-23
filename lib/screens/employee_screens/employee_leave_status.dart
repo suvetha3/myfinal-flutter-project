@@ -94,7 +94,7 @@ class _LeaveStatusScreenState extends State<LeaveStatusScreen> {
 
               return LeaveCard(
                 data: data,
-                showActions: false, // No Accept/Reject for employee view
+                showActions: false,
               );
             },
           );

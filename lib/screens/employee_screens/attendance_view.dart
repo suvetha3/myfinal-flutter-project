@@ -22,7 +22,7 @@ class _MyAttendanceScreenState extends State<MyAttendanceScreen> {
 
 
   bool _hasScanned = false;
-  bool _isCheckOut = false;
+   bool _isCheckOut = false;
 
   @override
   void initState() {
@@ -211,7 +211,7 @@ class _MyAttendanceScreenState extends State<MyAttendanceScreen> {
       print("Current Lat: ${currentPosition.latitude}, Lon: ${currentPosition.longitude}");
       print("Distance: $distance meters");
 
-      if (distance > 2000) {
+      if (distance > 1000) {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(content: Text("You are not at the selected location.")),
         );

@@ -6,6 +6,7 @@ import '../../provider/user_provider.dart';
 import '../../services/firestore_service.dart';
 
 import '../../widgets/weather_card.dart';
+import '../common_screens/chat_screen.dart';
 import 'attendance_view.dart';
 import 'employee_leave_status.dart';
 import 'leave_request_page.dart';
@@ -179,6 +180,20 @@ class DashboardEmployee extends StatelessWidget {
             onTap: () => Navigator.push(context, MaterialPageRoute(builder: (_) => item.screen)),
           )),
         ],
+      ),
+      floatingActionButton: Tooltip(
+        message: "How can I help you?",
+        child: FloatingActionButton(
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => ChatScreen()),
+            );
+          },
+          backgroundColor: Colors.deepPurple,
+          shape: const CircleBorder(),
+          child: const Icon(Icons.smart_toy_rounded, size: 28, color: Colors.white),
+        ),
       ),
     );
   }

@@ -29,7 +29,7 @@ class UserProvider extends ChangeNotifier {
   void clearUser() {
     _email = null;
     _name = null;
-    _role = null; // Add this line
+    _role = null;
     notifyListeners();
   }
 

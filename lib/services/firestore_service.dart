@@ -4,7 +4,7 @@ import 'package:intl/intl.dart';
 class FirestoreService {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
-  //
+
   Future<Map<String, dynamic>?> getUserDataByEmail(String email) async {
     try {
       final checkEmail =
@@ -173,7 +173,7 @@ class FirestoreService {
 
   //weekly report
   Future<List<Map<String, dynamic>>> getWeekAttendance(DateTime startDate) async {
-    final endDate = startDate.add(const Duration(days: 5)); // Full 7-day week
+    final endDate = startDate.add(const Duration(days: 5));
 
     final formattedStart = DateFormat('dd-MM-yyyy').format(startDate);
     final formattedEnd = DateFormat('dd-MM-yyyy').format(endDate);
@@ -186,25 +186,4 @@ class FirestoreService {
 
     return snapshot.docs.map((doc) => doc.data()).toList();
   }
-
-
-  // //monthly report
-  // Future<List<Map<String, dynamic>>> getMonthAttendance(DateTime monthDate) async {
-  //   final firstDay = DateTime(monthDate.year, monthDate.month, 1);
-  //   final lastDay = DateTime(monthDate.year, monthDate.month + 1, 0);
-  //
-  //   final dateList = List.generate(
-  //     lastDay.day,
-  //         (index) => DateFormat('dd-MM-yyyy').format(DateTime(monthDate.year, monthDate.month, index + 1)),
-  //   );
-  //
-  //   final snapshot = await FirebaseFirestore.instance
-  //       .collection('attendance')
-  //       .where('date', whereIn: dateList)
-  //       .get();
-  //
-  //   return snapshot.docs.map((doc) => doc.data()).toList();
-  // }
-
-
 }

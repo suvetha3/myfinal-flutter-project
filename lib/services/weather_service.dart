@@ -23,14 +23,14 @@ class WeatherService {
         permission = await Geolocator.requestPermission();
       }
 
-      // 2. Get current position
+      // 2. Get current location
       Position position = await Geolocator.getCurrentPosition(
           desiredAccuracy: LocationAccuracy.high);
 
       double lat = position.latitude;
       double lon = position.longitude;
 
-      // 3. Use coordinates to get weather
+      // 3. Use location to get weather
       final url =
           'https://api.openweathermap.org/data/2.5/weather?lat=$lat&lon=$lon&appid=$apiKey&units=metric';
 

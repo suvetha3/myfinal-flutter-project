@@ -195,4 +195,3 @@ class _GenerateMainBranchQRScreenState extends State<GenerateMainBranchQRScreen>
 }
 
 
-//11.105816666510862,78.58707225363561

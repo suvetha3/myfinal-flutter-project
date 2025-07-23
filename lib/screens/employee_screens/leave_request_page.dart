@@ -15,7 +15,6 @@ class LeaveRequestForm extends StatefulWidget {
 
 class _LeaveRequestFormState extends State<LeaveRequestForm> {
   final _formKey = GlobalKey<FormState>();
-  final _crudService = CrudService();
 
   String? _selectedLeaveType;
   String _shortDesc = '';
