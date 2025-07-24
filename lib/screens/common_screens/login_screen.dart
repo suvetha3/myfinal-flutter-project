@@ -36,6 +36,13 @@ class _LoginScreenState extends State<LoginScreen> {
 
         if (userData != null) {
           final storedPassword = userData['password'];
+          final status = (userData['status'] ?? '').toString().toLowerCase();
+
+          if (status != 'active') {
+            _showSnackBar("Your account is inactive. Please contact the administrator.");
+            return;
+          }
+
           if (storedPassword != password) {
             _showSnackBar("Incorrect password. Please try again.");
           } else {
@@ -204,7 +211,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               } else if (!RegExp(
                                 r'^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#\$%^&*]).{6,}$',
                               ).hasMatch(value)) {
-                                return 'Password must be atleast 6 characters, \n include upper/lower case, number & symbol';
+                                return 'Password must be atleast 6 characters,\ninclude upper/lower case, number & symbol';
                               }
                               return null;
                             },

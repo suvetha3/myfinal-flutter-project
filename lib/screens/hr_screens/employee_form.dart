@@ -24,10 +24,10 @@ class _EmployeeFormState extends State<EmployeeForm> {
   late TextEditingController phoneController;
   late TextEditingController addressController;
   late TextEditingController designationController;
-  late TextEditingController statusController;
   late TextEditingController genderController;
   late TextEditingController dobController;
   late TextEditingController jodController;
+  bool isActive = true;
 
   DateTime? dob;
   DateTime? jod;
@@ -47,7 +47,7 @@ class _EmployeeFormState extends State<EmployeeForm> {
     phoneController = TextEditingController(text: emp?.phone ?? '');
     addressController = TextEditingController(text: emp?.address ?? '');
     designationController = TextEditingController(text: emp?.designation ?? '');
-    statusController = TextEditingController(text: emp?.status ?? 'Active');
+    isActive = (emp?.status.toLowerCase() ?? 'active') == 'active';
     genderController = TextEditingController(text: emp?.gender ?? 'Female');
     dobController = TextEditingController(
       text: emp?.dob != null ? DateFormat('dd-MM-yyyy').format(emp!.dob) : '',
@@ -91,7 +91,7 @@ class _EmployeeFormState extends State<EmployeeForm> {
         address: addressController.text.trim(),
         designation: designationController.text.trim(),
         joiningDate: jod ?? now,
-        status: statusController.text.trim(),
+        status: isActive ? 'Active' : 'Inactive',
         gender: genderController.text.trim(),
         isLogin: widget.employee?.isLogin ?? false,
         createdBy: '',
@@ -119,7 +119,6 @@ class _EmployeeFormState extends State<EmployeeForm> {
     phoneController.dispose();
     addressController.dispose();
     designationController.dispose();
-    statusController.dispose();
     genderController.dispose();
     dobController.dispose();
     jodController.dispose();
@@ -204,12 +203,19 @@ class _EmployeeFormState extends State<EmployeeForm> {
                 validator: (val) => val == null || val.isEmpty ? 'Required' : null,
               ),
               const FormSpacer(),
-              ReusableTextField(
-                controller: statusController,
-                label: const RequiredField('Status'),
-                validator: (val) => val == null || val.isEmpty ? 'Required' : null,
+              SwitchListTile(
+                contentPadding: EdgeInsets.zero,
+                title: const Text("Status"),
+                subtitle: Text(isActive ? "Active" : "Inactive"),
+                value: isActive,
+                onChanged: (value) {
+                  setState(() {
+                    isActive = value;
+                  });
+                },
               ),
               const FormSpacer(),
+
               ReusableDropdown(
                 label: const RequiredField('Gender'),
                 value: genderController.text.isNotEmpty ? genderController.text : null,
